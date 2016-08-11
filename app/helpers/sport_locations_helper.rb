@@ -1,0 +1,2 @@
+module SportLocationsHelper
+end
