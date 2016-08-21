@@ -6,48 +6,61 @@ Challenge.destroy_all
 UserChallenge.destroy_all
 SportLocation.destroy_all
 
-user = User.create(
-  first_name: "Mathew",
-  last_name: "Vacha",
-  email: "matvacha@yahoo.com",
-  password: "password",
-  age: 20
-)
+5.times do 
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  age = Random.new.rand(18..35)
 
-sport = Sport.create(
-  name: "Basketball"
-)
+  User.create(
+    first_name: first_name,
+    last_name: last_name,
+    email: "#{first_name}.#{last_name}@yahoo.com",
+    password: "password",
+    age: age
+  )
 
-location = Location.create(
-  name: "park",
-  longitude: "-87.932599",
-  latitude: "41.882512"
-)
+  sport_name = ["Basketball", "Soccer", "Football", "Hockey", "Baseball", "Tennis"]
 
-SportLocation.create(
-  location_id: location.id,
-  sport_id: sport.id
-)
+  Sport.create(
+    name: sport_name.sample
+  )
+ 
+  location_name = ["park", "gym", "fieldhouse", "school", "track"]
+  latitude = Faker::Address.latitude
+  longitude = Faker::Address.longitude
 
-Favorite.create(
-  user_id: user.id,
-  sport_id: sport.id
-)
+  Location.create(
+    name: location_name.sample,
+    longitude: latitude,
+    latitude: longitude
+  )
 
-Favorite.create(
-  user_id: user.id,
-  location_id: location.id
-)
+  SportLocation.create(
+    location_id: Location.ids.sample,
+    sport_id: Sport.ids.sample
+  )
 
-challenge = Challenge.create(
-  creator_id: user.id,
-  location_id: location.id,
-  sport_id: 1,
-  text: "1v1 Basketball"
-)
+  Favorite.create(
+    user_id: User.ids.sample,
+    sport_id: Sport.ids.sample
+  )
 
-UserChallenge.create(
-  user_id: user.id,
-  challenge_id: challenge.id
-)
+  Favorite.create(
+    user_id: User.ids.sample,
+    location_id: Location.ids.sample
+  )
+
+  text = ["1v1 Basketball", "1v1 Soccer", "1v1 Tennis", "1v1 Run"]
+  challenge = Challenge.create(
+    creator_id: User.ids.sample,
+    location_id: Location.ids.sample,
+    sport_id: Sport.ids.sample,
+    text: text.sample
+  )
+
+  UserChallenge.create(
+    user_id: User.ids.sample,
+    challenge_id: Challenge.ids.sample
+  )
+end
 p "Done"

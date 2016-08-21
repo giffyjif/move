@@ -1,0 +1,14 @@
+<%= form_tag '/form_result', method: :post do %>
+<div>
+  <%= label_tag :text, 'Enter description: ' %>
+  <%= text_field_tag :text %>
+  <%= label_tag :sport, 'Enter sport: ' %>
+  <%= text_field_tag :sport %>
+  <%= label_tag :location, 'Enter location: ' %>
+  <%= text_field_tag :location %>
+  <%= hidden_field_tag :creator_id %>
+</div>
+<div>
+  <%= submit_tag 'Submit challenge!' %>
+</div>
+<% end %>

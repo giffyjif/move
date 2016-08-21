@@ -1,0 +1,34 @@
+<div>
+  <div>
+  <% if @challenge.errors.any? %>
+  <div id="error_explanation">
+    <h4><%= pluralize(@challenge.errors.count, "error") %> prohibited this challenge from being saved:</h4>
+ 
+    <ul>
+    <% @challenge.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+</div>
+</div>
+<%= form_tag url, method: verb do %>
+  <div class="form-group">
+      <%= label_tag :text %>
+      <%= text_field_tag :text, @challenge.text, class: "form-control"  %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :sport  %>
+      <%= text_field_tag :sport_id, @challenge.sport, class: "form-control"  %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :location  %>
+      <%= text_field_tag :location_id, @challenge.location, class: "form-control"  %>
+    </div>
+    <div class="form-group">
+      <%= hidden_field_tag :creator_id, @challenge.creator_id, class: "form-control"  %>
+    </div>
+  </div>
+  <%= submit_tag "Save challenge", class: "btn btn-default" %>
+<% end %>
