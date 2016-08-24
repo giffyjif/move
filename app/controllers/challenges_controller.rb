@@ -16,12 +16,11 @@ class ChallengesController < ApplicationController
 
   def create
     @challenge = Challenge.create(
-      text: params['text'],
-      sport_id: params['sport_id'],
-      location_id: params['location_id'],
+      description: params['description'],
+      challenge_location: params['challenge_location'],
       creator_id: current_user.id 
     )
-    binding.pry
+    # binding.pry
     if @challenge.save
       flash[:success] = "challenge successfully created!"
       redirect_to "/challenges/#{@challenge.id}"
@@ -43,7 +42,7 @@ class ChallengesController < ApplicationController
   def update
     @challenge = Challenge.find_by(id: params['id'])
     @challenge.update(
-      text: params['text'],
+      description: params['description'],
       sport_id: params['sport_id'],
       location_id: params['location_id'],
       creator_id: current_user.id

@@ -15,16 +15,12 @@
 </div>
 <%= form_tag url, method: verb do %>
   <div class="form-group">
-      <%= label_tag :text %>
-      <%= text_field_tag :text, @challenge.text, class: "form-control"  %>
-    </div>
-    <div class="form-group">
-      <%= label_tag :sport  %>
-      <%= text_field_tag :sport_id, @challenge.sport, class: "form-control"  %>
+      <%= label_tag :description %>
+      <%= text_field_tag :description, @challenge.description, class: "form-control"  %>
     </div>
     <div class="form-group">
       <%= label_tag :location  %>
-      <%= text_field_tag :location_id, @challenge.location, class: "form-control"  %>
+      <%= text_field_tag :challenge_location, @challenge.challenge_location, class: "form-control"  %>
     </div>
     <div class="form-group">
       <%= hidden_field_tag :creator_id, @challenge.creator_id, class: "form-control"  %>

@@ -2,9 +2,12 @@
   <p>Welcome <%= current_user.full_name %>!</p>
 <% end %>
 
-<!-- <h3>All challenges:</h3> -->
-<% @challenges.each do |challenge| %>
-<a href="/challenges/<%= challenge.id %>"><h4><%= challenge.text %></h4></a>
-<p><%= challenge.sport.name %></p>
-<p><%= challenge.location.name %></p> 
+<h3>All challenges:</h3>
+<% @current_user.challenges.each do |challenge| %>
+<a href="/challenges/<%= challenge.id %>"><h4><%= challenge.description %></h4></a>
+<p><%= challenge.challenge_location %></p> 
+<% end %>
+<% @current_user.created_challenges.each do |challenge| %>
+<a href="/challenges/<%= challenge.id %>"><h4><%= challenge.description %></h4></a>
+<p><%= challenge.challenge_location %></p> 
 <% end %>

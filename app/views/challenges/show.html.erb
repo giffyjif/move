@@ -1,7 +1,5 @@
-<h4><%= @challenge.text%></h4>
-<p><%= @challenge.creator_id %></p>
-<p><%= @challenge.location.name %></p>
-<p><%= @challenge.id.sport.name %></p>
+<h4><%= @challenge.description%></h4>
+<p><%= @challenge.challenge_location %></p>
 <a href="/challenges">Back to all challenges</a>
 <div>
   <%= link_to "Delete this challenge", "/challenges/#{@challenge.id}", class: "btn btn-warning", method: :delete %>
