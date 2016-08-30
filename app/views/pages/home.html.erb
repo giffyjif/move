@@ -2,6 +2,7 @@
 <% if current_user %>
   <p>Welcome <%= current_user.full_name %></p>
 <% end %>
-<div id="map"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>"
-async defer></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=mapCallback">
+</script>
+
+
