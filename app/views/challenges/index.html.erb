@@ -1,7 +1,22 @@
 <% if current_user %>
   <p>Welcome <%= current_user.full_name %>!</p>
 <% end %>
-
+<div ng-app="app">
+  <div ng-controller="challengesCtrl" >
+    <h3>Create a challenge</h3>
+    <form>
+      <div>
+        <label>Description: </label>
+        <input ng-model="newChallengeName">
+      </div>
+      <div>
+        <label>Address: </label>
+        <input ng-model="newChallengeLocation">
+      </div>
+      <input type="submit" ng-click="createChallenge(newChallengeName, newChallengeLocation)">
+    </form>
+  </div>
+</div>
 <h3>All challenges:</h3>
 <% @current_user.challenges.each do |challenge| %>
 <a href="/challenges/<%= challenge.id %>"><h4><%= challenge.description %></h4></a>
