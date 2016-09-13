@@ -1,20 +1,10 @@
 <% if current_user %>
   <p>Welcome <%= current_user.full_name %>!</p>
 <% end %>
+<div id="map"></div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>"></script>
 <div ng-app="app">
-  <div ng-controller="challengesCtrl" >
-    <h3>Create a challenge</h3>
-    <form>
-      <div>
-        <label>Description: </label>
-        <input ng-model="newChallengeName">
-      </div>
-      <div>
-        <label>Address: </label>
-        <input ng-model="newChallengeLocation">
-      </div>
-      <input type="submit" ng-click="createChallenge(newChallengeName, newChallengeLocation)">
-    </form>
+  <div ng-controller="challengesCtrl" ng-init="setup()">
   </div>
 </div>
 <h3>All challenges:</h3>

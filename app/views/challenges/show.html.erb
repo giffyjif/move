@@ -1,7 +1,78 @@
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      margin: auto;
+      width: 75%;
+      border: 3px solid black;
+      padding: 10px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<div id="map"></div>
+<script>
+  function initMap() {
+    var myLatLng = {lat: <%= @challenge.lat %>, lng: <%= @challenge.lng %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: myLatLng
+    });
+
+    var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">Challenge</h1>'+
+        '<div id="bodyContent">'+
+        '<p><%= @challenge.description %>' +
+        '</div>'+
+        '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
+
 <h4><%= @challenge.description%></h4>
 <p><%= @challenge.challenge_location %></p>
 <a href="/challenges">Back to all challenges</a>
+<div ng-app="app">
+<!--   <div ng-controller="showCtrl" ng-init="setup()">
+  </div> -->
+  <div ng-controller="commentsCtrl" ng-init="setup()" id="commentsCtrl">
+    <h1>Comments</h1>  
+    <% if current_user %>
+      <div>
+        <label for="body">New comment: </label>
+        <input type="text" id="body" name="body" ng-model="newCommentBody">
+        <input type="submit" ng-click="createNewComment(newCommentBody)">
+      </div>
+    <% end %>
+      <div class="comment" ng-repeat="comment in comments | orderBy:'created_at':true">
+          {{ comment.name }}: {{ comment.body }}
+      </div>
+  </div>
+</div>
 <div>
-  <%= link_to "Delete this challenge", "/challenges/#{@challenge.id}", class: "btn btn-warning", method: :delete %>
-  <%= link_to "Edit", "/challenges/#{@challenge.id}/edit", class: "btn btn-success" %>
+  <% if current_user %>
+    <%= link_to "Delete this challenge", "/challenges/#{@challenge.id}", class: "btn btn-warning", method: :delete %>
+    <%= link_to "Edit", "/challenges/#{@challenge.id}/edit", class: "btn btn-success" %>
+  <% end %>
 </div>
