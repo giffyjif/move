@@ -7,7 +7,8 @@ class Api::V1::CommentsController < ApplicationController
   def create
     @comment = Comment.create(
       user_id: current_user.id,
-      body: params[:body]
+      body: params[:body],
+      challenge_id: params[:challenge_id]
     )
     ActionCable.server.broadcast 'activity_channel', {
       id: @comment.id,

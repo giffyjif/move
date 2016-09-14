@@ -45,8 +45,6 @@
       navigator.geolocation.getCurrentPosition(mapCallback);
     };
 
-    console.log($compile);
-
     $scope.setLatLng = function(markerLat, markerLng) {
       $scope.inputLat = markerLat;
       $scope.inputLng = markerLng;

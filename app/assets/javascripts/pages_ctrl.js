@@ -21,8 +21,21 @@ function bindInfoWindow(marker, map, infowindow) {
               position: myLatLng,
               map: map
             });
+
+            var link = "/challenges/" + $scope.challenges[i].id;
+            console.log(link);
+            var contentString = '<div id="content">' +
+              '<div id="siteNotice">' +
+              '</div>' +
+              '<h4 id="firstHeading" class="firstHeading">' + $scope.challenges[i].description + '</h4>' +
+              '<div id="bodyContent">' +
+              '<a href=' + link + '>Link to view</a>' +
+              '<p>' + $scope.challenges[i].description + '</p>' +
+              '</div>' +
+              '</div>';
             var infowindow = new google.maps.InfoWindow({
-              content: $scope.challenges[i].description
+              content: contentString
+              // content: $scope.challenges[i].description
             });
 
             // marker.addListener('click', function() {

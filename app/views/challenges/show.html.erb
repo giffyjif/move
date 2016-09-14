@@ -29,9 +29,9 @@
     var contentString = '<div id="content">'+
         '<div id="siteNotice">'+
         '</div>'+
-        '<h1 id="firstHeading" class="firstHeading">Challenge</h1>'+
+        '<h4 id="firstHeading" class="firstHeading"><%= @challenge.description %></h4>'+
         '<div id="bodyContent">'+
-        '<p><%= @challenge.description %>' +
+        '<p><%= @challenge.challenge_location %>' +
         '</div>'+
         '</div>';
 
@@ -54,10 +54,8 @@
 <p><%= @challenge.challenge_location %></p>
 <a href="/challenges">Back to all challenges</a>
 <div ng-app="app">
-<!--   <div ng-controller="showCtrl" ng-init="setup()">
-  </div> -->
-  <div ng-controller="commentsCtrl" ng-init="setup()" id="commentsCtrl">
-    <h1>Comments</h1>  
+  <div ng-controller="commentsCtrl" ng-init="setup(<%= @challenge.id %>)" id="commentsCtrl">
+    <h4>Comments</h4>  
     <% if current_user %>
       <div>
         <label for="body">New comment: </label>

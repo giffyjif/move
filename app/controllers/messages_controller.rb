@@ -5,17 +5,37 @@ class MessagesController < ApplicationController
   def reply
     message_body = params["Body"]
     from_number = params["From"]
-    data = Unirest.get('http://localhost:3000/api/v1/comments').body
-    message = []
-    data.each do |d|
-      message << d['name'] + ": " + d['body']
+    error_message = 'Sorry we didnt understand that'
+    comment_data = Unirest.get('http://localhost:3000/api/v1/comments').body
+    challenge_data = Unirest.get('http://localhost:3000/api/v1/challenges').body
+    comment_message = []
+    comment_data.each do |d|
+      comment_message << d['name'] + ": " + d['body']
+    end
+    challenge_message = []
+    challenge_data.each do |d|
+      challenge_message << d['description'] + " " + "lat: " + d['lat'].to_s + " " + "lng: " + d['lng'].to_s
     end
     boot_twilio
-    sms = @client.messages.create(
-      from: ENV['twilio_number'],
-      to: from_number,
-      body: message
-    )
+    if message_body == 'comments'
+      sms = @client.messages.create(
+        from: ENV['twilio_number'],
+        to: from_number,
+        body: comment_message
+      )
+    elsif message_body == 'challenges'
+      sms = @client.messages.create(
+        from: ENV['twilio_number'],
+        to: from_number,
+        body: challenge_message
+      )
+    else
+      sms = @client.messages.create(
+        from: ENV['twilio_number'],
+        to: from_number,
+        body: error_message
+      )
+    end
     
   end
  
