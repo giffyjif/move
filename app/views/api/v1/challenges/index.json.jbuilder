@@ -4,4 +4,5 @@ json.array! @challenges.each do |challenge|
   json.challenge_location challenge.challenge_location
   json.lng challenge.lng
   json.lat challenge.lat
+  json.creator_id challenge.creator_id
 end

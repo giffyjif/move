@@ -1,27 +1,25 @@
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
-  <style>
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    #map {
-      margin: auto;
-      width: 75%;
-      border: 3px solid black;
-      padding: 10px;
-      height: 400px;
-    }
-  </style>
 </head>
-
+<br>
 <div id="map"></div>
 <script>
   function initMap() {
+    var opt = { minZoom: 16, maxZoom: 19 };
     var myLatLng = {lat: <%= @challenge.lat %>, lng: <%= @challenge.lng %>};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    var geocoder = new google.maps.Geocoder();
+    // geocoder.geocode({}, function (results, status) {
+    //     if (status !== google.maps.GeocoderStatus.OK) {
+    //         alert(status);
+    //     }
+    //     // This is checking to see if the Geoeode Status is OK before proceeding
+    //     if (status == google.maps.GeocoderStatus.OK) {
+    //         console.log(results);
+    //         var address = (results[0].formatted_address);
+    //     }
+    // });
+    var map = new google.maps.Map(document.getElementById('map', opt), {
       zoom: 16,
       center: myLatLng
     });
@@ -49,28 +47,45 @@
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
-
-<h4><%= @challenge.description%></h4>
-<p><%= @challenge.challenge_location %></p>
-<a href="/challenges">Back to all challenges</a>
-<div ng-app="app">
-  <div ng-controller="commentsCtrl" ng-init="setup(<%= @challenge.id %>)" id="commentsCtrl">
-    <h4>Comments</h4>  
-    <% if current_user %>
-      <div>
-        <label for="body">New comment: </label>
-        <input type="text" id="body" name="body" ng-model="newCommentBody">
-        <input type="submit" ng-click="createNewComment(newCommentBody)">
-      </div>
-    <% end %>
-      <div class="comment" ng-repeat="comment in comments | orderBy:'created_at':true">
-          {{ comment.name }}: {{ comment.body }}
-      </div>
-  </div>
-</div>
-<div>
+<div style="margin-left: 70px; margin-top: 80px;">
+  <h1><%= @challenge.description%></h1>
+  <h2><%= @challenge.challenge_location %></h2>
+  <h3>Lat: <%= @challenge.lat %></h3>
+  <h3>Lng: <%= @challenge.lng %></h3>
+  <h4><a href="/challenges">Back to all challenges</a></h4>
+<!--   <br> -->
   <% if current_user %>
     <%= link_to "Delete this challenge", "/challenges/#{@challenge.id}", class: "btn btn-warning", method: :delete %>
-    <%= link_to "Edit", "/challenges/#{@challenge.id}/edit", class: "btn btn-success" %>
   <% end %>
+</div>
+<div ng-app="app">
+  <div ng-controller="commentsCtrl" ng-init="setup(<%= @challenge.id %>)" id="commentsCtrl"> 
+    <div style="margin-left: 700px; margin-top: -290px;" id="comments" class="comments">
+      <h2 class="title">Comments</h2>
+      <div class="comment clearfix" ng-repeat="comment in comments | orderBy:'created_at':true">
+<!--         <div class="comment-avatar">
+          <img class="img-circle" src="/template/images/avatar.jpg" alt="avatar">
+        </div> -->
+        <header>
+          <div><p>{{ comment.name }} : </p></div>
+        </header>
+        <div class="comment-content">
+          <div class="comment-body clearfix">
+            <p>{{ comment.body }} </p>
+          </div>
+        </div>
+      </div>
+      <% if current_user %>
+        <div class="comments-form">
+          <h2 class="title" for="body">Add your comment:</h2>
+          <form role="form" id="comment-form">
+            <div class="form-group has-feedback">
+              <input style="width: 200px; height: 60px;" type="text" id="body" name="body" ng-model="newCommentBody">
+            </div>
+            <input type="submit" value="Submit" ng-click="createNewComment(newCommentBody)" class="btn btn-default">
+          </form>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

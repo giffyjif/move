@@ -10,11 +10,11 @@ class MessagesController < ApplicationController
     challenge_data = Unirest.get('http://localhost:3000/api/v1/challenges').body
     comment_message = []
     comment_data.each do |d|
-      comment_message << d['name'] + ": " + d['body']
+      comment_message += d['name'] + ": " + d['body'] + "/n"
     end
-    challenge_message = []
+    challenge_message = ""
     challenge_data.each do |d|
-      challenge_message << d['description'] + " " + "lat: " + d['lat'].to_s + " " + "lng: " + d['lng'].to_s
+      challenge_message += d['description'] + " " + "lat: " + d['lat'].to_s + " " + "lng: " + d['lng'].to_s + "/n"
     end
     boot_twilio
     if message_body == 'comments'

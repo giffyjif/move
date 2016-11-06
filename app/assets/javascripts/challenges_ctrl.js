@@ -11,7 +11,7 @@
         var infowindow;
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: position.coords.latitude, lng: position.coords.longitude},
-          zoom: 16
+          zoom: 18
         });
         function html(marker) {
           var html = "<div ng-app='app'>" +

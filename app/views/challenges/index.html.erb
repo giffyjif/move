@@ -1,13 +1,14 @@
 <% if current_user %>
   <p>Welcome <%= current_user.full_name %>!</p>
 <% end %>
+<h3>Click your location on the map to create  movement:</h3>
 <div id="map"></div>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>"></script>
 <div ng-app="app">
   <div ng-controller="challengesCtrl" ng-init="setup()">
   </div>
 </div>
-<h3>All challenges:</h3>
+<h3>Your movements:</h3>
 <% @current_user.challenges.each do |challenge| %>
 <a href="/challenges/<%= challenge.id %>"><h4><%= challenge.description %></h4></a>
 <p><%= challenge.challenge_location %></p> 

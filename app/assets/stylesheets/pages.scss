@@ -2,18 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.page-wrapper {
+  background-image: url("http://www.findingtherainbow.net/wp-content/uploads/2015/06/light_blue_parchment_paper_background_1800x1600.jpg");
+}
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow: auto;
 }
 #map {
   margin: auto;
-  width: 75%;
+  width: 96%;
   border: 3px solid black;
   padding: 10px;
-  height: 400px;
+  height: 550px;
 }
-  
-#messages {height: 300px; overflow: scroll; border: 1px solid #ddd}
+
+#challenge-link {
+  margin-left: 722px;
+  margin-top: 20px;
+  color: #3697d9;
+  font-size: 21px;
+}
+
+#welcomebuttons {
+  margin-left: 205px;
+}

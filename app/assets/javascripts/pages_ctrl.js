@@ -29,8 +29,8 @@ function bindInfoWindow(marker, map, infowindow) {
               '</div>' +
               '<h4 id="firstHeading" class="firstHeading">' + $scope.challenges[i].description + '</h4>' +
               '<div id="bodyContent">' +
+              '<p>' + $scope.challenges[i].challenge_location + '</p>' +
               '<a href=' + link + '>Link to view</a>' +
-              '<p>' + $scope.challenges[i].description + '</p>' +
               '</div>' +
               '</div>';
             var infowindow = new google.maps.InfoWindow({

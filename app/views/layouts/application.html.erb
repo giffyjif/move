@@ -128,63 +128,34 @@
                   </ul>
                   <ul class="list-inline hidden-sm hidden-xs">
                     <li><i class="fa fa-map-marker pr-5 pl-10"></i>Chicago, IL</li>
-                    <li><i class="fa fa-envelope-o pr-5 pl-10"></i> matvachaparambil@gmail.com</li>
+                    <li><i class="fa fa-envelope-o pr-5 pl-10"></i> movetogether@gmail.com</li>
                   </ul>
                 </div>
                 <!-- header-top-first end -->
               </div>
-              <div class="col-xs-9 col-sm-6 col-md-3">
-
-                <!-- header-top-second start -->
-                <!-- ================ -->
-                <div id="header-top-second"  class="clearfix">
-
-                  <!-- header top dropdowns start -->
-                  <!-- ================ -->
-                  <div class="header-top-dropdown text-right">
-                    <div class="btn-group">
-                      <a href="/signup" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i> Sign Up</a>
-                    </div>
-                    <div class="btn-group dropdown">
-                      <button type="button" class="btn dropdown-toggle btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-lock pr-10"></i> Login</button>
-                      <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
-                        <li>
-                          <form class="login-form margin-clear">
-                            <div class="form-group has-feedback">
-                              <label class="control-label">Username</label>
-                              <input type="text" class="form-control" placeholder="username">
-                              <i class="fa fa-user form-control-feedback"></i>
-                            </div>
-                            <div class="form-group has-feedback">
-                              <label class="control-label">Password</label>
-                              <input type="password" class="form-control" placeholder="password">
-                              <i class="fa fa-lock form-control-feedback"></i>
-                            </div>
-                            <button type="submit" class="btn btn-gray btn-sm">Log In</button>
-                            <span class="pl-5 pr-5">or</span>
-                            <br>
-                            <button type="submit" class="btn btn-default btn-sm">Sign Up</button>
-<!--                             <ul>
-                              <li><a href="/#">Forgot your password?</a></li>
-                            </ul>
-                            <span class="text-center">Login with</span>
-                            <ul class="social-links circle small colored clearfix">
-                              <li class="facebook"><a target="_blank" href="/http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-                              <li class="twitter"><a target="_blank" href="/http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-                              <li class="googleplus"><a target="_blank" href="/http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
-                            </ul> -->
-                          </form>
-                        </li>
-                      </ul>
-                    </div>
+<!--                 <div id="header-top-second"  class="clearfix"> -->
+<!--                   <div class="header-top-dropdown text-right"> -->
+                  <div>
+                    <% if session[:user_id] %>
+                      <div class="btn-group">
+                        <a style="margin-left: 190px;" href="/logout" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i> Log Out</a>
+                      </div>
+                    <% end %>
+                    <% if session[:user_id].nil? %>
+                      <div id="welcomebuttons">
+                        <div class="btn-group">
+                          <a style="margin-left: 107px;" href="/signup" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i> Sign Up</a>
+                        </div>
+                        <div class="btn-group">
+                          <a href="/login" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i> Log In</a>
+                        </div>
+                      </div>
+                    <% end %>
                   </div>
-                  <!--  header top dropdowns end -->
-                </div>
-                <!-- header-top-second end -->
-              </div>
+<!--                   </div> -->
+<!--                 </div> -->
             </div>
-          </div>
-        </div>
+         </div>
         <!-- header-top end -->
         
         <!-- header start -->
@@ -206,7 +177,7 @@
                   
                   <!-- logo -->
                 <div id="logo" class="logo">
-                  <h3 class="margin-clear"><a href="/" class="logo-font link-light">Move <span class="text-default">Together</span></a></h3>
+                  <h3 style="margin-left: -50px;" class="margin-clear"><a href="/" class="logo-font link-light"><span class="text-default">Move Together</span></a></h3>
                 </div>
 
                   <!-- name-and-slogan -->
@@ -247,19 +218,9 @@
                         </button>
                         
                       </div>
-
-                      <!-- Collect the nav links, forms, and other content for toggling -->
-                      <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                        <!-- main-menu -->
-                        <ul class="nav navbar-nav ">
-
-                          <!-- mega-menu start -->
-                            <a href="/challenges">Challenges</a>
-                        </ul>
-                      </div>
-                        <!-- header dropdown buttons end-->
-                        
-                      </div>
+                        <div id="challenge-link">
+                           <a href="/challenges" class="logo-font link-light"><span class="text-default">Make a move</span></a>
+                        </div>
 
                     </div>
                   </nav>

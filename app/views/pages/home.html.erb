@@ -1,10 +1,9 @@
 <div ng-app="app">
   <div ng-controller="pagesCtrl" ng-init="setup()">
-    <h1>Welcome!</h1>
-    <% if current_user %>
-      <p>Welcome <%= current_user.full_name %></p>
-    <% end %>
-    <div id="message"></div>
+    <div>
+      <h4 style="margin-left:30px;">Movements near you: </h4>
+    </div>
+    <br>
     <div id="map"></div>
     <br>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>"></script>
